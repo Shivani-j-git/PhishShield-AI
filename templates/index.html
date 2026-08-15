@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PhishShield AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🛡 PhishShield AI</h1>
+    <p>AI Powered Phishing Detection System</p>
+
+    <form action="/scan" method="POST">
+
+        <input
+            type="url"
+            name="url"
+            placeholder="Paste suspicious URL..."
+            required
+        >
+
+        <button>Scan URL</button>
+
+    </form>
+
+    <h2>Recent Scans</h2>
+
+    <table>
+
+        <tr>
+            <th>URL</th>
+            <th>Status</th>
+            <th>Risk</th>
+        </tr>
+
+        {% for row in history %}
+        <tr>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}%</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>

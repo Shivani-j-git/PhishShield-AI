@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PhishShield AI - Result</title>
+    <title>Result</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
 <div class="container">
 
-    <h1>🛡 PhishShield AI</h1>
+<h1>🛡 Scan Result</h1>
 
-    <div class="card">
+<div class="card">
 
-        <h2>Scan Result</h2>
+<p><b>URL</b></p>
+<p>{{url}}</p>
 
-        <p><strong>URL:</strong></p>
-        <p>{{ url }}</p>
+{% if result=="Phishing" %}
+<h2 class="danger">⚠ Phishing Website</h2>
+{% else %}
+<h2 class="safe">✅ Safe Website</h2>
+{% endif %}
 
-        {% if result == "Phishing" %}
-            <h2 class="danger">⚠️ PHISHING WEBSITE</h2>
-        {% else %}
-            <h2 class="safe">✅ SAFE WEBSITE</h2>
-        {% endif %}
+<h3>AI Risk Score : {{score}}%</h3>
 
-        <h3>Risk Score: {{ score }}%</h3>
+<a href="/">Scan Another</a>
 
-        <h3>Detection Reasons</h3>
-        <ul>
-            {% for r in reasons %}
-                <li>{{ r }}</li>
-            {% endfor %}
-        </ul>
-
-        <br>
-        <a href="/">⬅ Scan Another URL</a>
-
-    </div>
+</div>
 
 </div>
 

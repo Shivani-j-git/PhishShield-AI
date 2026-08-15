@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Analysis</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📧 Email Phishing Analysis</h1>
+
+    <div class="card">
+
+        <h3>Email Content</h3>
+        <p>{{ email }}</p>
+
+        {% if result=="Phishing" %}
+            <h2 class="danger">⚠ Suspicious Email</h2>
+        {% else %}
+            <h2 class="safe">✅ Safe Email</h2>
+        {% endif %}
+
+        <h3>Risk Score: {{ score }}%</h3>
+
+        <h3>Reasons</h3>
+        <ul>
+        {% for r in reasons %}
+            <li>{{ r }}</li>
+        {% endfor %}
+        </ul>
+
+        <a href="/">⬅ Back to Dashboard</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

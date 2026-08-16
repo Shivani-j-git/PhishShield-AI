@@ -9,29 +9,34 @@
 <div class="container">
 
     <h1>🛡 PhishShield AI</h1>
-    <p class="subtitle">
-        AI Powered Cybersecurity Dashboard
-    </p>
+    <p class="subtitle">AI Powered Cybersecurity Dashboard</p>
 
-   <!-- Analytics -->
-<div class="stats">
+    <!-- Statistics -->
+    <div class="stats">
 
-    <div class="box">
-        <h2>{{ total }}</h2>
-        <p>Total Scans</p>
+        <div class="box">
+            <h2>{{ total }}</h2>
+            <p>Total Scans</p>
+        </div>
+
+        <div class="box">
+            <h2>{{ safe }}</h2>
+            <p>Safe URLs</p>
+        </div>
+
+        <div class="box">
+            <h2>{{ phishing }}</h2>
+            <p>Phishing</p>
+        </div>
+
     </div>
 
-    <div class="box">
-        <h2>{{ safe }}</h2>
-        <p>Safe URLs</p>
+    <!-- Analytics Button -->
+    <div class="card">
+        <a href="/analytics">
+            <button>📊 View Analytics Dashboard</button>
+        </a>
     </div>
-
-    <div class="box">
-        <h2>{{ phishing }}</h2>
-        <p>Phishing</p>
-    </div>
-
-</div>
 
     <!-- URL Scanner -->
     <div class="card">
@@ -51,24 +56,25 @@
         </form>
 
     </div>
-    <!-- QR Code Generator -->
-<div class="card">
 
-    <h2>📱 QR Code Generator</h2>
+    <!-- QR Generator -->
+    <div class="card">
 
-    <form action="/qr_generate" method="POST">
+        <h2>📱 QR Code Generator</h2>
 
-        <input
-            type="url"
-            name="qr_url"
-            placeholder="https://example.com"
-            required>
+        <form action="/qr_generate" method="POST">
 
-        <button>Generate QR Code</button>
+            <input
+                type="url"
+                name="qr_url"
+                placeholder="https://example.com"
+                required>
 
-    </form>
+            <button>Generate QR Code</button>
 
-</div>
+        </form>
+
+    </div>
 
     <!-- Email Scanner -->
     <div class="card">
@@ -89,7 +95,7 @@
 
     </div>
 
-    <!-- History -->
+    <!-- Recent Scan History -->
     <div class="card">
 
         <h2>🕘 Recent Scans</h2>
@@ -104,9 +110,9 @@
 
             {% for row in history %}
             <tr>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>{{row[3]}}%</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}%</td>
             </tr>
             {% endfor %}
 

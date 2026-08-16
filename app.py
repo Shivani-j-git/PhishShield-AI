@@ -139,6 +139,29 @@ def qr_generate():
         url=url,
         qr_image=qr_path
     )
+@app.route("/analytics")
+def analytics():
+
+    conn = sqlite3.connect(DB)
+    cur = conn.cursor()
+
+    cur.execute("SELECT COUNT(*) FROM scans")
+    total = cur.fetchone()[0]
+
+    cur.execute("SELECT COUNT(*) FROM scans WHERE result='Safe'")
+    safe = cur.fetchone()[0]
+
+    cur.execute("SELECT COUNT(*) FROM scans WHERE result='Phishing'")
+    phishing = cur.fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+        "analytics.html",
+        total=total,
+        safe=safe,
+        phishing=phishing
+    )
 
 
 if __name__ == "__main__":

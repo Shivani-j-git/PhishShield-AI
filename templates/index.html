@@ -9,40 +9,92 @@
 <div class="container">
 
     <h1>🛡 PhishShield AI</h1>
-    <p>AI Powered Phishing Detection System</p>
+    <p class="subtitle">
+        AI Powered Cybersecurity Dashboard
+    </p>
 
-    <form action="/scan" method="POST">
+    <!-- Statistics -->
+    <div class="stats">
 
-        <input
-            type="url"
-            name="url"
-            placeholder="Paste suspicious URL..."
-            required
-        >
+        <div class="box">
+            <h2>🌐</h2>
+            <h3>URL Scanner</h3>
+        </div>
 
-        <button>Scan URL</button>
+        <div class="box">
+            <h2>📧</h2>
+            <h3>Email Scanner</h3>
+        </div>
 
-    </form>
+        <div class="box">
+            <h2>🤖</h2>
+            <h3>AI Detection</h3>
+        </div>
 
-    <h2>Recent Scans</h2>
+    </div>
 
-    <table>
+    <!-- URL Scanner -->
+    <div class="card">
 
-        <tr>
-            <th>URL</th>
-            <th>Status</th>
-            <th>Risk</th>
-        </tr>
+        <h2>🔍 Scan Suspicious URL</h2>
 
-        {% for row in history %}
-        <tr>
-            <td>{{row[1]}}</td>
-            <td>{{row[2]}}</td>
-            <td>{{row[3]}}%</td>
-        </tr>
-        {% endfor %}
+        <form action="/scan" method="POST">
 
-    </table>
+            <input
+                type="url"
+                name="url"
+                placeholder="https://example.com/login"
+                required>
+
+            <button>Analyze URL</button>
+
+        </form>
+
+    </div>
+
+    <!-- Email Scanner -->
+    <div class="card">
+
+        <h2>📧 Analyze Email</h2>
+
+        <form action="/email_scan" method="POST">
+
+            <textarea
+                name="email"
+                rows="7"
+                placeholder="Paste suspicious email here..."
+                required></textarea>
+
+            <button>Analyze Email</button>
+
+        </form>
+
+    </div>
+
+    <!-- History -->
+    <div class="card">
+
+        <h2>🕘 Recent Scans</h2>
+
+        <table>
+
+            <tr>
+                <th>URL</th>
+                <th>Status</th>
+                <th>Risk</th>
+            </tr>
+
+            {% for row in history %}
+            <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}%</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
 
 </div>
 

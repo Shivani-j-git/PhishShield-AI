@@ -98,13 +98,18 @@ def scan():
 
     cur.execute(
         "INSERT INTO scans(url,result,score,time) VALUES (?,?,?,?)",
-        (url, result, score,
-         datetime.now().strftime("%d-%m-%Y %H:%M"))
+        (
+            url,
+            result,
+            score,
+            datetime.now().strftime("%d-%m-%Y %H:%M")
+        )
     )
 
     conn.commit()
     conn.close()
 
+    # Generate PDF report
     pdf = create_report(url, result, score)
 
     return render_template(

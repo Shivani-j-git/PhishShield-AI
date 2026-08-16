@@ -5,6 +5,7 @@ import joblib
 from datetime import datetime
 from utils.url_features import extract_features
 from utils.email_scanner import scan_email
+from utils.qr_scanner import generate_qr
 
 app = Flask(__name__)
 
@@ -107,6 +108,18 @@ def email_scan():
         result=result,
         score=score,
         reasons=reasons
+    )
+@app.route("/qr_generate", methods=["POST"])
+def qr_generate():
+
+    url = request.form["qr_url"]
+
+    qr_path = generate_qr(url)
+
+    return render_template(
+        "qr_result.html",
+        url=url,
+        qr_image=qr_path
     )
 
 

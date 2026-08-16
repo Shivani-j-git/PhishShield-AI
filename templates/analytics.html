@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Security Analytics</title>
+    <title>PhishShield AI - Analytics</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -9,7 +9,7 @@
 <div class="container">
 
     <h1>📊 Security Analytics</h1>
-    <p class="subtitle">PhishShield AI Dashboard</p>
+    <p class="subtitle">Real-time Scan Statistics</p>
 
     <div class="stats">
 
@@ -30,17 +30,19 @@
 
     </div>
 
-    <div class="card">
+    <div class="card" style="text-align:center;">
 
         <h2>Protection Summary</h2>
 
-        <svg width="240" height="240" viewBox="0 0 42 42">
+        <svg width="220" height="220" viewBox="0 0 42 42">
 
+            <!-- Background -->
             <circle cx="21" cy="21" r="15.9"
                 fill="transparent"
-                stroke="#1e293b"
+                stroke="#334155"
                 stroke-width="5"/>
 
+            <!-- Safe -->
             <circle cx="21" cy="21" r="15.9"
                 fill="transparent"
                 stroke="#22c55e"
@@ -48,6 +50,7 @@
                 stroke-dasharray="{{ (safe*100/total) if total else 0 }} 100"
                 stroke-dashoffset="25"/>
 
+            <!-- Phishing -->
             <circle cx="21" cy="21" r="15.9"
                 fill="transparent"
                 stroke="#ef4444"
@@ -64,12 +67,14 @@
 
         </svg>
 
-        <p style="color:#22c55e;">🟢 Safe : {{ safe }}</p>
-        <p style="color:#ef4444;">🔴 Phishing : {{ phishing }}</p>
+        <h3 style="color:#22c55e;">🟢 Safe : {{ safe }}</h3>
+        <h3 style="color:#ef4444;">🔴 Phishing : {{ phishing }}</h3>
 
     </div>
 
-    <a href="/"><button>⬅ Back to Dashboard</button></a>
+    <a href="/">
+        <button>⬅ Back to Dashboard</button>
+    </a>
 
 </div>
 

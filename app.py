@@ -4,6 +4,7 @@ import os
 import joblib
 from datetime import datetime
 from utils.url_features import extract_features
+from utils.email_scanner import scan_email
 
 app = Flask(__name__)
 
@@ -93,6 +94,19 @@ def scan():
         url=url,
         result=result,
         score=score
+    )
+@app.route("/email_scan", methods=["POST"])
+def email_scan():
+    email = request.form["email"]
+
+    result, score, reasons = scan_email(email)
+
+    return render_template(
+        "email_result.html",
+        email=email,
+        result=result,
+        score=score,
+        reasons=reasons
     )
 
 

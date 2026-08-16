@@ -6,6 +6,7 @@ from datetime import datetime
 from utils.url_features import extract_features
 from utils.email_scanner import scan_email
 from utils.qr_scanner import generate_qr
+from utils.pdf_report import create_report
 
 app = Flask(__name__)
 
@@ -97,22 +98,21 @@ def scan():
 
     cur.execute(
         "INSERT INTO scans(url,result,score,time) VALUES (?,?,?,?)",
-        (
-            url,
-            result,
-            score,
-            datetime.now().strftime("%d-%m-%Y %H:%M")
-        )
+        (url, result, score,
+         datetime.now().strftime("%d-%m-%Y %H:%M"))
     )
 
     conn.commit()
     conn.close()
 
+    pdf = create_report(url, result, score)
+
     return render_template(
         "result.html",
         url=url,
         result=result,
-        score=score
+        score=score,
+        pdf=pdf
     )
 @app.route("/email_scan", methods=["POST"])
 def email_scan():

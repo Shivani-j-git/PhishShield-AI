@@ -59,13 +59,31 @@ def home():
     conn = sqlite3.connect(DB)
     cur = conn.cursor()
 
+    # Recent scans
     cur.execute("SELECT * FROM scans ORDER BY id DESC LIMIT 5")
     history = cur.fetchall()
 
+    # Total scans
+    cur.execute("SELECT COUNT(*) FROM scans")
+    total = cur.fetchone()[0]
+
+    # Safe count
+    cur.execute("SELECT COUNT(*) FROM scans WHERE result='Safe'")
+    safe = cur.fetchone()[0]
+
+    # Phishing count
+    cur.execute("SELECT COUNT(*) FROM scans WHERE result='Phishing'")
+    phishing = cur.fetchone()[0]
+
     conn.close()
 
-    return render_template("index.html", history=history)
-
+    return render_template(
+        "index.html",
+        history=history,
+        total=total,
+        safe=safe,
+        phishing=phishing
+    )
 
 @app.route("/scan", methods=["POST"])
 def scan():
